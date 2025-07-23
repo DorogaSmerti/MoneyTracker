@@ -1,17 +1,25 @@
 from rest_framework import serializers
-from .models import Tasks
+from .models import Wallet, Transaction
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+    
+class TransactionSerializers(serializers.ModelSerializer):
+    wallet = serializers.PrimaryKeyRelatedField(read_only=True)
 
-
-class TasksSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Tasks
-        fields = ['id','title', 'completed', 'created']
+        model = Transaction
+        fields = '__all__'
 
-class RegisterSerializers(serializers.ModelSerializer):
-    password1 = serializers.CharField(write_only=True, required=True)
-    password2 = serializers.CharField(write_only=True, required=True)
+class MoneySerializers(serializers.ModelSerializer):
+    transactions = TransactionSerializers(many=True, read_only=True)
+    class Meta:
+        model = Wallet
+        fields = '__all__'
+
+class RegisterSerializer(serializers.ModelSerializer):
+    password1 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
@@ -35,6 +43,6 @@ class LoginSerializers(serializers.Serializer):
     def validate(self, data):
         user = authenticate(username=data['username'], password=data['password'])
         if user is None:
-            raise serializers.ValidationError('Неверное имя или пароль')
+            raise serializers.ValidationError('Неправильный логин или пароль')
         data['user'] = user
         return data
