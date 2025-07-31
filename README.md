@@ -31,12 +31,16 @@
    git clone https://github.com/DorogaSmerti/MoneyTracke.git
    cd MoneyTracker
 2. Створити та активувати віртуальне середовище
-  python -m venv venv
-  source venv/bin/activate  # або venv\Scripts\activate для Windows
+   ```
+   python -m venv venv
+   source venv/bin/activate  # або venv\Scripts\activate для Windows
 3. Встановити залежності
-  pip install -r requirements.txt
-4. Застосувати міграції
+   ```
+   pip install -r requirements.txt
+5. Застосувати міграції
+   ```
    python manage.py migrate
-5. Запустити сервер
+7. Запустити сервер
+   ```
    python manage.py runserver
 
