@@ -6,7 +6,6 @@
 - **Python 3.11**
 - **Django**
 - **Django REST Framework (DRF)**
-- **PostgreSQL**
 - **JWT (аутентифікація)**
 - **Swagger (документація API)**
 
