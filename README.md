@@ -43,4 +43,3 @@
 7. Запустити сервер
    ```
    python manage.py runserver
-
